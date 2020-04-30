@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A bundle list</title>
+</head>
+<body>
+
+<h1>A bundle list</h1>
+
+<hr>
+
+
+<ul>
+    {%  for Abundle in Abundles %}
+        <li><a href="/dashboard/get_qali_result/{{ Abundle.ucs_name }}/">{{ Abundle.ucs_name}}</a></li>
+    {%  endfor %}
+</ul>
+
+</body>
+</html>

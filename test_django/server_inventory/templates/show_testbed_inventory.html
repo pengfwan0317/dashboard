@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show testbed inventory</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/static/plugins/js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <div style="width: 1200px;margin: 0 auto;">
+        <h1>
+        Testbed information
+        <div style="float:right">
+        <button type="button" class="btn btn-default">
+            <a href="/server_inventory/">
+            <span class="glyphicon glyphicon-home" aria-hidden="true">
+                <font  color="black">
+
+                </font>
+            </span>
+            </a>
+        </button>
+
+        </div>
+        </h1>
+    </div>
+
+
+    <hr>
+
+    <table class="table table-striped table-bordered table-hover table-condensed">
+        <tread>
+            <tr>
+                <th>Testbed name</th>
+                <th>Testbed IP</th>
+                <th>Delete</th>
+                <th>Refresh</th>
+            </tr>
+
+        </tread>
+
+        <tbody>
+            {% for i in all_testbed %}
+            <tr>
+                <td>
+                    <a href="/server_inventory/show_testbed_blade/{{ i.testbed_name }}">{{ i.testbed_name }}</a>
+                </td>
+                <td>
+                    {{ i.testbed_ip }}
+                </td>
+                <td>
+                    <a href="/server_inventory/del_testbed/{{ i.id }}/">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                        </span>
+                    </a>
+                </td>
+                <td>
+                    <a href="/server_inventory/update_testbed_blade/{{ i.testbed_name }}">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true">
+                        </span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <hr>
+
+    <form method="post" action="/server_inventory/testbed_inventory/">
+    {% csrf_token %}
+        <p>
+            Add testbed name: <input type="text" name="new_testbed_name" placeholder="testbed name" maxlength="300"/>
+        </p>
+        <p>
+            Add testbed IP: <input type="text" name="new_testbed_ip" placeholder="testbed ip" maxlength="300"/>
+        </p>
+        <input type="submit" value="add">{{ msg }}
+    </form>
+</body>
+</html>

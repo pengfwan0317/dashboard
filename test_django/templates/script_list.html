@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Qali script list</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+</head>
+<body>
+<div style="width: 700px;margin: 0 auto;">
+<h1>
+    Qali script list
+    <div style="float:right">
+        <button type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-home" aria-hidden="true">
+                <font  color="blue">
+                <a href="/dashboard/index/">home</a>
+                </font>
+            </span>
+        </button>
+    </div>
+</h1>
+
+<hr>
+    <div style="float:right">
+        <button type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true">
+                <font  color="blue">
+                <a href="/dashboard/update_testcase/">update_scripts</a>
+                </font>
+            </span>
+        </button>
+    </div>
+
+    <table class="table table-striped table-bordered table-hover table-condensed">
+<div style="width: 700px;margin: 0 auto;">
+    <tread>
+        <tr>
+            <th>Case Name</th>
+            <th>Case Folder</th>
+        </tr>
+    </tread>
+
+    <tbody>
+    {% for testcases in testcases_list %}
+        <tr>
+            <td>
+                <a href="/dashboard/get_qali_result/{{ testcases.t_name }}/">{{ testcases.t_name }}</a>
+            </td>
+            <td>
+                {{ testcases.t_folder_name }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+</body>
+</html>

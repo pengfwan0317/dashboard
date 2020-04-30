@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BQA Server Inventory</title>
+    <style>
+        .hide{
+            display: none;
+        }
+        .shadow{
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: black;
+            opacity: 0.4;
+            z;
+        }
+        .model{
+            position: fixed;
+        }
+    </style>
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+  <!-- Favicons -->
+    <link rel="icon" href="/static/eStartup_plugins/img/favicon.ico">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">
+
+  <!-- Bootstrap css -->
+  <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
+    <link href="/static/eStartup_plugins/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+    <link href="/static/eStartup_plugins/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/static/eStartup_plugins/lib/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/static/eStartup_plugins/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/eStartup_plugins/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/eStartup_plugins/lib/modal-video/css/modal-video.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+    <link href="/static/eStartup_plugins/css/style.css" rel="stylesheet">
+
+</head>
+
+
+
+<body>
+
+    <header id="header" class="header header-hide">
+        <div class="container">
+
+            <div id="logo" class="pull-left">
+                <h1><a href="#body" class="scrollto"><span>hi,</span>Testbed Inventory</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="/server_inventory/testbed_inventory/">Testbed Inventory</a></li>
+                    <li class="menu-has-children"><a href="">M6</a>
+                        <ul>
+                            <li><a href="/server_inventory/search_platform/Wasco/">Wasco</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-has-children"><a href="">M5</a>
+                        <ul>
+                            <li><a href="/server_inventory/search_platform/PO/">Pomona</a></li>
+                            <li><a href="/server_inventory/search_platform/PR/">Presidio</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-has-children"><a href="">M4</a>
+                        <ul>
+                            <li><a href="/server_inventory/search_platform/KC/">Kings Canyon</a></li>
+                            <li><a href="/server_inventory/search_platform/CS/">Candlestick</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-has-children"><a href="">EX</a>
+                        <ul>
+                            <li><a href="/server_inventory/search_platform/YS1/">Yosemite 1</a></li>
+                            <li><a href="/server_inventory/search_platform/YS2/">Yosemite 2</a></li>
+                            <li><a href="/server_inventory/search_platform/Shasta/">Shasta</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-has-children"><a href="">M3</a>
+                        <ul>
+                            <li><a href="/server_inventory/search_platform/CR/">Castle Rock</a></li>
+                            <li><a href="/server_inventory/search_platform/SC/">Silver Creek</a></li>
+                            <li><a href="/server_inventory/search_platform/SEQ/">Sequoia</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-has-children"><a href="">M2</a>
+                        <ul>
+                            <li><a href="/server_inventory/search_platform/Gooding/">Gooding</a></li>
+                            <li><a href="/server_inventory/search_platform/Marin/">Marin</a></li>
+                            <li><a href="/server_inventory/search_platform/Ventura/">Ventura</a></li>
+                            <li><a href="/server_inventory/search_platform/SF/">San Francisco</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-active">
+                        <a href="/">Home</a>
+                    </li>
+                </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </header><!-- #header -->
+
+
+
+    <!--==========================
+    Hero Section
+    ============================-->
+    <section id="hero" class="wow fadeIn">
+        <div class="hero-container">
+
+                <form method="post" action="/server_inventory/search_blade/">
+                {% csrf_token %}
+                    <h4>
+                        Search by Server SN:
+                    </h4>
+                    <input type="text" name="server_sn" placeholder="Server SN" maxlength="300"/>
+                    <input type="submit" value="search">{{ msg }}
+                </form>
+{##}
+{#            <img src="/static/eStartup_plugins/img/video-bg.jpg" alt="Hero Imgs">#}
+        </div>
+
+    </section><!-- #hero -->
+
+
+
+
+
+
+</body>
+</html>

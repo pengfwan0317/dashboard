@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testbed blade List</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/static/plugins/js/jquery-3.4.1.min.js"></script>
+    <script src="/static/plugins/highcharts/highcharts.js"></script>
+    <script src="/static/plugins/highcharts/highcharts-more.js"></script>
+    <script src="/static/plugins/highcharts/modules/exporting.js"></script>
+</head>
+
+<body>
+<div style="width: 1200px;margin: 0 auto;">
+<h1>
+    {{ testbedname }}:{{ query_ip }} Blade List
+    <div style="float:right">
+        <button type="button" class="btn btn-default">
+            <a href="/server_inventory/">
+            <span class="glyphicon glyphicon-home" aria-hidden="true">
+                <font  color="black">
+
+                </font>
+            </span>
+            </a>
+        </button>
+
+    </div>
+</h1>
+</div>
+
+<hr>
+    <table class="table table-striped table-bordered table-hover table-condensed">
+
+    <tread>
+        <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>SN</th>
+            <th>CPU</th>
+            <th>Memory</th>
+            <th>Adaptor</th>
+            <th>TPM</th>
+            <th>M.2</th>
+            <th>Storage Controller</th>
+            <th>GPU</th>
+        </tr>
+    </tread>
+
+    <tboady>
+
+        {% for blade in testbed_blade_list %}
+            <tr>
+                <td>
+                    {{ blade.blade_chassis_id }}/{{ blade.blade_slot_id }}
+                </td>
+                <th>
+                    {{ blade.blade_name }}
+                </th>
+                <th>
+                    {{ blade.blade_sn }}
+                </th>
+                <th>
+                    {{ blade.blade_cpu_info }}
+                </th>
+                <th>
+                    {{ blade.blade_memory_info }}
+                </th>
+                <th>
+                    {{ blade.blade_adaptor_info }}
+                </th>
+                <th>
+                    {{ blade.blade_tpm_info }}
+                </th>
+                <th>
+                    {{ blade.blade_mini_storage }}
+                </th>
+                <th>
+                    {{ blade.blade_storage_info}}
+                </th>
+                <th>
+                    {{ blade.blade_gpu_info }}
+                </th>
+            </tr>
+        {% endfor %}
+    </tboady>
+    </table>
+
+</body>
+</html>

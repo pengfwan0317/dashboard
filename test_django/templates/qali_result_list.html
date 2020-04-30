@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Qali Result List</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/static/plugins/js/jquery-3.4.1.min.js"></script>
+    <script src="/static/plugins/highcharts/highcharts.js"></script>
+    <script src="/static/plugins/highcharts/highcharts-more.js"></script>
+    <script src="/static/plugins/highcharts/modules/exporting.js"></script>
+</head>
+<body>
+<div style="width: 1200px;margin: 0 auto;">
+<h1>
+    Qali Result List
+    <div style="float:right">
+        <button type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-home" aria-hidden="true">
+                <font  color="blue">
+                <a href="/dashboard/index/">home</a>
+                </font>
+            </span>
+        </button>
+
+    </div>
+</h1>
+
+<hr>
+
+<form method="post" action="/dashboard/show_qali_result/">
+    {% csrf_token %}
+    <p>
+        <label class="control-label" for="inputHelpBlock">Project Selection </label>
+        <div style="left: auto" class="form-group" >
+            <select class="form-control" name="project_id" id="">
+            <option value=""></option>
+            {% comment %}
+            <option value="">JBMR1_4_1_2a</option>
+            <option value="ICMR3_patch_4_0_4h">ICMR3_patch_4_0_4h</option>
+            {% endcomment %}
+
+            {% for single_case in project_list %}
+                <option value="{{ single_case }}">{{ single_case }}</option>
+            {% endfor %}
+
+        </select>
+        </div>
+
+    </p>
+    <input class="btn btn-info" type="submit" value="submit">
+</form>
+<hr>
+<div id="container" style="min-width:400px;height:400px"></div>
+<script>
+        Highcharts.chart('container', {
+		chart: {
+				plotBackgroundColor: null,
+				plotBorderWidth: null,
+				plotShadow: false,
+				type: 'pie'
+		},
+		title: {
+				text: '{{ selected_project_id }} Qali Result Analyse'
+		},
+		tooltip: {
+				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		},
+		plotOptions: {
+				pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+								enabled: true,
+								format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+								style: {
+										color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+								}
+						}
+				}
+		},
+		series: [{
+				name: 'Brands',
+				colorByPoint: true,
+				data: [{
+						name: 'Other-error',
+						y: {{ other_result }},
+						sliced: true,
+						selected: true
+				}, {
+						name: 'Fail',
+						y: {{ fail_result }}
+				}, {
+						name: 'Pass',
+						y: {{ pass_result }}
+				}, {
+						name: 'Un-run',
+						y: {{ un_run_result }}
+				}]
+		}]
+});
+    </script>
+<table class="table table-striped table-bordered table-hover table-condensed">
+</div>
+    <tread>
+        <tr>
+            <th>Case Name</th>
+            <th>Case Result</th>
+            <th>Blade Version</th>
+            <th>BIOS Version</th>
+            <th>UCS Version</th>
+        </tr>
+    </tread>
+
+    <tboady>
+
+    {% for single_case in qali_result %}
+        <tr>
+            <td>
+                <a href={{ single_case.q_case_link }}>{{ single_case.q_case_name}}</a>
+            </td>
+            <td>
+                {% if single_case.q_case_result == 'PASS' %}
+                <font color="#7fff00"> {{ single_case.q_case_result }}</font>
+                {%  elif single_case.q_case_result == 'Fail' %}
+                <font color="#ffd700"> {{ single_case.q_case_result }}</font>
+                {%  else %}
+                <font color="#ff4500"> {{ single_case.q_case_result }}</font>
+                {% endif %}
+            </td>
+            <td>
+                {{ single_case.q_blade_name }}
+            </td>
+            <td>
+                {{ single_case.q_bios_name }}
+            </td>
+            <td>
+                {{ single_case.q_abundle_version }}
+            </td>
+        </tr>
+    {% endfor %}
+
+
+    </tboady>
+
+
+</table>
+
+</body>
+</html>
